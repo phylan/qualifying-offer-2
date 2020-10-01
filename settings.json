@@ -1,0 +1,13 @@
+{
+  "scraper": {
+    "url": "https://questionnaire-148920.appspot.com/swe/data.html",
+    "table_id": "salaries-table",
+    "player_name_class": "player-name",
+    "player_salary_class": "player-salary",
+    "player_year_class": "player-year",
+    "player_level_class": "player-level"
+  },
+  "offer_rules": {
+    "top_quantity": 125
+  }
+}
