@@ -1,7 +1,10 @@
-from configuration import OfferRulesConfig
-from players import Player
+from .configuration import OfferRulesConfig
+from .players import Player
 from typing import List
 import statistics
+
+def _sort_players_by_salary(players: List[Player]) -> List[Player]:
+	return sorted(players, key=lambda player: player.salary, reverse=True)
 
 class OfferCalculator(object):
 	def __init__(self, players: List[Player], offer_rules_config: OfferRulesConfig):
@@ -19,7 +22,3 @@ class OfferCalculator(object):
 
 	def get_excluded_players(self) -> List[Player]:
 		return self._players_without_salary
-
-	@staticmethod
-	def _sort_players_by_salary(players: List[Player]) -> List[Player]:
-		return sorted(players, key=lambda player: player.salary, reverse=True)

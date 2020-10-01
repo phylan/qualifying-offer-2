@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-from configuration import ScraperConfig
-from exceptions import ScrapingException
-from players import Player
+from .configuration import ScraperConfig
+from .exceptions import ScrapingException
+from .players import Player
 from typing import List
 import requests
 import logging
