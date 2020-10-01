@@ -6,17 +6,6 @@ import json
 
 app = FlaskAPI(__name__)
 
-try:
-	with open('settings.json') as f:
-		config = json.load(f)
-
-	scraper_config = ScraperConfig.from_dict(config['scraper'])
-	offer_config = OfferRulesConfig.from_dict(config['offer_rules'])
-
-except (KeyError, FileNotFoundError, IOError) as ex:
-	raise ConfigurationException(ex)
-
-
 @app.route("/qualifying-offer", methods=['GET'])
 def get():
 	try:
@@ -26,6 +15,20 @@ def get():
 		return ex.message, status.HTTP_500_INTERNAL_SERVER_ERROR
 
 	return offer_info.to_dict(), status.HTTP_200_OK
+
+def configure():
+	try:
+		with open('settings.json') as f:
+			config = json.load(f)
+
+		scraper_config = ScraperConfig.from_dict(config['scraper'])
+		offer_config = OfferRulesConfig.from_dict(config['offer_rules'])
+		return scraper_config, offer_config
+
+	except (KeyError, FileNotFoundError, IOError) as ex:
+		raise ConfigurationException(ex)
+
+scraper_config, offer_config = configure()
 
 if __name__ == "__main__":
 	app.run(debug=True)
