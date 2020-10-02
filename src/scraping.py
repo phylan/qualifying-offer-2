@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-from configuration import ScraperConfig
-from exceptions import ScrapingException
-from players import Player
+from .configuration import ScraperConfig
+from .exceptions import ScrapingException
+from .players import Player
 from typing import List
 import requests
 import logging
@@ -41,7 +41,7 @@ class Scraper(object):
 
 	def _parse_html(self, html:str) -> List[Player]:
 		try:
-			document = BeautifulSoup(html)
+			document = BeautifulSoup(html, features="html.parser")
 			rows = document.select(f"#{self.scraper_config.table_id} tr")
 			return [self._parse_row(row) for row in rows]
 		except Exception as ex:
