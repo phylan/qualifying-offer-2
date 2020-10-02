@@ -3,8 +3,10 @@ from src.qualifying_offer import QualifyingOfferInfo
 from src.configuration import OfferRulesConfig, ScraperConfig
 from src.exceptions import ConfigurationException
 import json
+from flask_cors import CORS
 
 app = FlaskAPI(__name__)
+CORS(app)
 
 @app.route("/qualifying-offer", methods=['GET'])
 def get():
